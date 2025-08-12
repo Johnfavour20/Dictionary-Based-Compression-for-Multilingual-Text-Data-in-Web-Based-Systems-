@@ -1,0 +1,1 @@
+This is a simple text to demonstrate the compression process. Let's see how well it works with multilingual characters like こんにちは and 안녕하세요.

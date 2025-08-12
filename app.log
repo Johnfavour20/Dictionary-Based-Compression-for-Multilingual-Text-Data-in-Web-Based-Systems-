@@ -1,0 +1,194 @@
+2025-08-12 09:12:26,314 - __main__ - WARNING - Statement execution warning: near "INDEX": syntax error
+2025-08-12 09:12:26,324 - __main__ - WARNING - Statement: CREATE TABLE IF NOT EXISTS files (
+        file_id INTEGER PRIMARY KEY AUTOINCREMENT,
+        user_i...
+2025-08-12 09:12:26,329 - __main__ - WARNING - Statement execution warning: near "INDEX": syntax error
+2025-08-12 09:12:26,332 - __main__ - WARNING - Statement: CREATE TABLE IF NOT EXISTS compression_results (
+        result_id INTEGER PRIMARY KEY AUTOINCREMENT...
+2025-08-12 09:12:26,344 - __main__ - WARNING - Statement execution warning: near "INDEX": syntax error
+2025-08-12 09:12:26,348 - __main__ - WARNING - Statement: CREATE TABLE IF NOT EXISTS logs (
+        log_id INTEGER PRIMARY KEY AUTOINCREMENT,
+        user_id ...
+2025-08-12 09:12:26,355 - __main__ - WARNING - Statement execution warning: near "INDEX": syntax error
+2025-08-12 09:12:26,357 - __main__ - WARNING - Statement: CREATE TABLE IF NOT EXISTS system_stats (
+        stat_id INTEGER PRIMARY KEY AUTOINCREMENT,
+       ...
+2025-08-12 09:12:26,365 - __main__ - WARNING - Statement execution warning: near "INDEX": syntax error
+2025-08-12 09:12:26,370 - __main__ - WARNING - Statement: CREATE TABLE IF NOT EXISTS user_preferences (
+        preference_id INTEGER PRIMARY KEY AUTOINCREMEN...
+2025-08-12 09:12:26,949 - __main__ - INFO - Database schema initialized successfully
+2025-08-12 09:12:27,751 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5001
+ * Running on http://192.168.12.183:5001
+2025-08-12 09:12:27,786 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-08-12 09:12:27,918 - werkzeug - INFO -  * Restarting with stat
+2025-08-12 09:12:32,268 - __main__ - WARNING - Statement execution warning: near "INDEX": syntax error
+2025-08-12 09:12:32,271 - __main__ - WARNING - Statement: CREATE TABLE IF NOT EXISTS files (
+        file_id INTEGER PRIMARY KEY AUTOINCREMENT,
+        user_i...
+2025-08-12 09:12:32,277 - __main__ - WARNING - Statement execution warning: near "INDEX": syntax error
+2025-08-12 09:12:32,280 - __main__ - WARNING - Statement: CREATE TABLE IF NOT EXISTS compression_results (
+        result_id INTEGER PRIMARY KEY AUTOINCREMENT...
+2025-08-12 09:12:32,286 - __main__ - WARNING - Statement execution warning: near "INDEX": syntax error
+2025-08-12 09:12:32,297 - __main__ - WARNING - Statement: CREATE TABLE IF NOT EXISTS logs (
+        log_id INTEGER PRIMARY KEY AUTOINCREMENT,
+        user_id ...
+2025-08-12 09:12:32,304 - __main__ - WARNING - Statement execution warning: near "INDEX": syntax error
+2025-08-12 09:12:32,307 - __main__ - WARNING - Statement: CREATE TABLE IF NOT EXISTS system_stats (
+        stat_id INTEGER PRIMARY KEY AUTOINCREMENT,
+       ...
+2025-08-12 09:12:32,312 - __main__ - WARNING - Statement execution warning: near "INDEX": syntax error
+2025-08-12 09:12:32,315 - __main__ - WARNING - Statement: CREATE TABLE IF NOT EXISTS user_preferences (
+        preference_id INTEGER PRIMARY KEY AUTOINCREMEN...
+2025-08-12 09:12:32,325 - __main__ - INFO - Database schema initialized successfully
+2025-08-12 09:12:32,502 - werkzeug - WARNING -  * Debugger is active!
+2025-08-12 09:12:32,586 - werkzeug - INFO -  * Debugger PIN: 778-785-804
+2025-08-12 09:16:48,454 - werkzeug - INFO -  * Detected change in 'C:\\Users\\U\\Desktop\\multilingual text compression\\app.py', reloading
+2025-08-12 09:16:52,449 - werkzeug - INFO -  * Restarting with stat
+2025-08-12 09:17:05,630 - __main__ - WARNING - Statement execution warning: near "INDEX": syntax error
+2025-08-12 09:17:05,742 - __main__ - WARNING - Statement: CREATE TABLE IF NOT EXISTS users (
+        user_id INTEGER PRIMARY KEY AUTOINCREMENT,
+        userna...
+2025-08-12 09:17:05,761 - __main__ - WARNING - Statement execution warning: near "INDEX": syntax error
+2025-08-12 09:17:05,834 - __main__ - WARNING - Statement: CREATE TABLE IF NOT EXISTS files (
+        file_id INTEGER PRIMARY KEY AUTOINCREMENT,
+        user_i...
+2025-08-12 09:17:06,069 - __main__ - WARNING - Statement execution warning: near "INDEX": syntax error
+2025-08-12 09:17:06,090 - __main__ - WARNING - Statement: CREATE TABLE IF NOT EXISTS compression_results (
+        result_id INTEGER PRIMARY KEY AUTOINCREMENT...
+2025-08-12 09:17:06,285 - __main__ - WARNING - Statement execution warning: near "INDEX": syntax error
+2025-08-12 09:17:06,365 - __main__ - WARNING - Statement: CREATE TABLE IF NOT EXISTS logs (
+        log_id INTEGER PRIMARY KEY AUTOINCREMENT,
+        user_id ...
+2025-08-12 09:17:06,447 - __main__ - WARNING - Statement execution warning: near "INDEX": syntax error
+2025-08-12 09:17:06,534 - __main__ - WARNING - Statement: CREATE TABLE IF NOT EXISTS system_stats (
+        stat_id INTEGER PRIMARY KEY AUTOINCREMENT,
+       ...
+2025-08-12 09:17:06,606 - __main__ - WARNING - Statement execution warning: near "INDEX": syntax error
+2025-08-12 09:17:06,764 - __main__ - WARNING - Statement: CREATE TABLE IF NOT EXISTS user_preferences (
+        preference_id INTEGER PRIMARY KEY AUTOINCREMEN...
+2025-08-12 09:17:06,901 - __main__ - INFO - Database schema initialized successfully
+2025-08-12 09:17:08,072 - werkzeug - WARNING -  * Debugger is active!
+2025-08-12 09:17:08,355 - werkzeug - INFO -  * Debugger PIN: 778-785-804
+2025-08-12 09:22:58,486 - werkzeug - INFO -  * Detected change in 'C:\\Users\\U\\Desktop\\multilingual text compression\\setup.py', reloading
+2025-08-12 09:23:03,827 - werkzeug - INFO -  * Restarting with stat
+2025-08-12 09:23:12,519 - __main__ - WARNING - Statement execution warning: near "INDEX": syntax error
+2025-08-12 09:23:12,525 - __main__ - WARNING - Statement: CREATE TABLE IF NOT EXISTS users (
+        user_id INTEGER PRIMARY KEY AUTOINCREMENT,
+        userna...
+2025-08-12 09:23:12,534 - __main__ - WARNING - Statement execution warning: near "INDEX": syntax error
+2025-08-12 09:23:12,543 - __main__ - WARNING - Statement: CREATE TABLE IF NOT EXISTS files (
+        file_id INTEGER PRIMARY KEY AUTOINCREMENT,
+        user_i...
+2025-08-12 09:23:12,551 - __main__ - WARNING - Statement execution warning: near "INDEX": syntax error
+2025-08-12 09:23:12,560 - __main__ - WARNING - Statement: CREATE TABLE IF NOT EXISTS compression_results (
+        result_id INTEGER PRIMARY KEY AUTOINCREMENT...
+2025-08-12 09:23:12,566 - __main__ - WARNING - Statement execution warning: near "INDEX": syntax error
+2025-08-12 09:23:12,569 - __main__ - WARNING - Statement: CREATE TABLE IF NOT EXISTS logs (
+        log_id INTEGER PRIMARY KEY AUTOINCREMENT,
+        user_id ...
+2025-08-12 09:23:12,578 - __main__ - WARNING - Statement execution warning: near "INDEX": syntax error
+2025-08-12 09:23:12,581 - __main__ - WARNING - Statement: CREATE TABLE IF NOT EXISTS system_stats (
+        stat_id INTEGER PRIMARY KEY AUTOINCREMENT,
+       ...
+2025-08-12 09:23:12,588 - __main__ - WARNING - Statement execution warning: near "INDEX": syntax error
+2025-08-12 09:23:12,592 - __main__ - WARNING - Statement: CREATE TABLE IF NOT EXISTS user_preferences (
+        preference_id INTEGER PRIMARY KEY AUTOINCREMEN...
+2025-08-12 09:23:12,602 - __main__ - INFO - Database schema initialized successfully
+2025-08-12 09:23:12,817 - werkzeug - WARNING -  * Debugger is active!
+2025-08-12 09:23:13,090 - werkzeug - INFO -  * Debugger PIN: 778-785-804
+2025-08-12 09:24:42,958 - __main__ - WARNING - Statement execution warning: near "INDEX": syntax error
+2025-08-12 09:24:42,971 - __main__ - WARNING - Statement: CREATE TABLE IF NOT EXISTS users (
+        user_id INTEGER PRIMARY KEY AUTOINCREMENT,
+        userna...
+2025-08-12 09:24:42,981 - __main__ - WARNING - Statement execution warning: near "INDEX": syntax error
+2025-08-12 09:24:42,990 - __main__ - WARNING - Statement: CREATE TABLE IF NOT EXISTS files (
+        file_id INTEGER PRIMARY KEY AUTOINCREMENT,
+        user_i...
+2025-08-12 09:24:43,002 - __main__ - WARNING - Statement execution warning: near "INDEX": syntax error
+2025-08-12 09:24:43,008 - __main__ - WARNING - Statement: CREATE TABLE IF NOT EXISTS compression_results (
+        result_id INTEGER PRIMARY KEY AUTOINCREMENT...
+2025-08-12 09:24:43,068 - __main__ - WARNING - Statement execution warning: near "INDEX": syntax error
+2025-08-12 09:24:43,084 - __main__ - WARNING - Statement: CREATE TABLE IF NOT EXISTS logs (
+        log_id INTEGER PRIMARY KEY AUTOINCREMENT,
+        user_id ...
+2025-08-12 09:24:43,116 - __main__ - WARNING - Statement execution warning: near "INDEX": syntax error
+2025-08-12 09:24:43,163 - __main__ - WARNING - Statement: CREATE TABLE IF NOT EXISTS system_stats (
+        stat_id INTEGER PRIMARY KEY AUTOINCREMENT,
+       ...
+2025-08-12 09:24:43,311 - __main__ - WARNING - Statement execution warning: near "INDEX": syntax error
+2025-08-12 09:24:43,393 - __main__ - WARNING - Statement: CREATE TABLE IF NOT EXISTS user_preferences (
+        preference_id INTEGER PRIMARY KEY AUTOINCREMEN...
+2025-08-12 09:24:43,412 - __main__ - INFO - Database schema initialized successfully
+2025-08-12 09:24:44,094 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5001
+ * Running on http://192.168.12.183:5001
+2025-08-12 09:24:44,099 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-08-12 09:24:44,162 - werkzeug - INFO -  * Restarting with stat
+2025-08-12 09:24:48,659 - __main__ - WARNING - Statement execution warning: near "INDEX": syntax error
+2025-08-12 09:24:48,719 - __main__ - WARNING - Statement: CREATE TABLE IF NOT EXISTS users (
+        user_id INTEGER PRIMARY KEY AUTOINCREMENT,
+        userna...
+2025-08-12 09:24:48,766 - __main__ - WARNING - Statement execution warning: near "INDEX": syntax error
+2025-08-12 09:24:48,784 - __main__ - WARNING - Statement: CREATE TABLE IF NOT EXISTS files (
+        file_id INTEGER PRIMARY KEY AUTOINCREMENT,
+        user_i...
+2025-08-12 09:24:48,807 - __main__ - WARNING - Statement execution warning: near "INDEX": syntax error
+2025-08-12 09:24:48,873 - __main__ - WARNING - Statement: CREATE TABLE IF NOT EXISTS compression_results (
+        result_id INTEGER PRIMARY KEY AUTOINCREMENT...
+2025-08-12 09:24:48,895 - __main__ - WARNING - Statement execution warning: near "INDEX": syntax error
+2025-08-12 09:24:48,928 - __main__ - WARNING - Statement: CREATE TABLE IF NOT EXISTS logs (
+        log_id INTEGER PRIMARY KEY AUTOINCREMENT,
+        user_id ...
+2025-08-12 09:24:48,940 - __main__ - WARNING - Statement execution warning: near "INDEX": syntax error
+2025-08-12 09:24:48,948 - __main__ - WARNING - Statement: CREATE TABLE IF NOT EXISTS system_stats (
+        stat_id INTEGER PRIMARY KEY AUTOINCREMENT,
+       ...
+2025-08-12 09:24:48,958 - __main__ - WARNING - Statement execution warning: near "INDEX": syntax error
+2025-08-12 09:24:48,964 - __main__ - WARNING - Statement: CREATE TABLE IF NOT EXISTS user_preferences (
+        preference_id INTEGER PRIMARY KEY AUTOINCREMEN...
+2025-08-12 09:24:49,005 - __main__ - INFO - Database schema initialized successfully
+2025-08-12 09:24:49,812 - werkzeug - WARNING -  * Debugger is active!
+2025-08-12 09:24:49,908 - werkzeug - INFO -  * Debugger PIN: 778-785-804
+2025-08-12 09:32:57,769 - werkzeug - INFO -  * Detected change in 'C:\\Users\\U\\Desktop\\multilingual text compression\\app.py', reloading
+2025-08-12 09:33:01,827 - werkzeug - INFO -  * Restarting with stat
+2025-08-12 11:02:57,732 - __main__ - INFO - Database schema initialized successfully
+2025-08-12 11:05:25,287 - __main__ - INFO - Database schema initialized successfully
+2025-08-12 11:05:25,783 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5001
+ * Running on http://192.168.12.183:5001
+2025-08-12 11:05:25,788 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-08-12 11:05:25,856 - werkzeug - INFO -  * Restarting with stat
+2025-08-12 11:05:29,128 - __main__ - INFO - Database schema initialized successfully
+2025-08-12 11:05:29,284 - werkzeug - WARNING -  * Debugger is active!
+2025-08-12 11:05:29,369 - werkzeug - INFO -  * Debugger PIN: 778-785-804
+2025-08-12 11:11:57,464 - __main__ - INFO - Database schema initialized successfully
+2025-08-12 11:11:57,821 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5001
+ * Running on http://192.168.12.183:5001
+2025-08-12 11:11:57,842 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-08-12 11:11:57,968 - werkzeug - INFO -  * Restarting with stat
+2025-08-12 11:12:01,242 - __main__ - INFO - Database schema initialized successfully
+2025-08-12 11:12:01,411 - werkzeug - WARNING -  * Debugger is active!
+2025-08-12 11:12:01,570 - werkzeug - INFO -  * Debugger PIN: 778-785-804
+2025-08-12 11:18:26,734 - __main__ - INFO - Database schema initialized successfully
+2025-08-12 11:18:27,461 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5001
+ * Running on http://192.168.12.183:5001
+2025-08-12 11:18:27,467 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-08-12 11:18:27,551 - werkzeug - INFO -  * Restarting with stat
+2025-08-12 11:18:34,483 - __main__ - INFO - Database schema initialized successfully
+2025-08-12 11:18:34,695 - werkzeug - WARNING -  * Debugger is active!
+2025-08-12 11:18:34,800 - werkzeug - INFO -  * Debugger PIN: 778-785-804
+2025-08-12 11:21:45,590 - werkzeug - INFO - 127.0.0.1 - - [12/Aug/2025 11:21:45] "GET / HTTP/1.1" 200 -
+2025-08-12 11:21:50,656 - werkzeug - INFO - 127.0.0.1 - - [12/Aug/2025 11:21:50] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2025-08-12 11:22:09,927 - werkzeug - INFO - 127.0.0.1 - - [12/Aug/2025 11:22:09] "[35m[1mPOST /api/register HTTP/1.1[0m" 201 -
+2025-08-12 11:22:37,151 - werkzeug - INFO - 127.0.0.1 - - [12/Aug/2025 11:22:37] "POST /api/login HTTP/1.1" 200 -
+2025-08-12 11:43:09,599 - werkzeug - INFO - 127.0.0.1 - - [12/Aug/2025 11:43:09] "GET / HTTP/1.1" 200 -
+2025-08-12 11:49:21,865 - werkzeug - INFO - 127.0.0.1 - - [12/Aug/2025 11:49:21] "POST /api/login HTTP/1.1" 200 -
+2025-08-12 11:55:41,179 - werkzeug - INFO - 127.0.0.1 - - [12/Aug/2025 11:55:41] "[36mGET / HTTP/1.1[0m" 304 -
