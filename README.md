@@ -5,9 +5,8 @@
 [![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 [![Status](https://img.shields.io/badge/Status-Active-success.svg)](https://github.com/your-repo)
 
-> **Author**: Wellington Tonye (U2020/5570137)  
-> **Institution**: [Your University Name]  
-> **Project Type**: Final Year Project / Research Implementation  
+> Programmer: Igboeche Johnfavour Ikenna
+> **Institution**: Uniport 
 > **Algorithm**: LZW77 with Hybrid Dictionary Approach
 
 ## 🎯 **Project Overview**
@@ -402,5 +401,6 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ---
 
-*This project represents academic research in multilingual text compression and demonstrates practical implementation of dictionary-based compression algorithms for web-based systems.*#   D i c t i o n a r y - B a s e d - C o m p r e s s i o n - f o r - M u l t i l i n g u a l - T e x t - D a t a - i n - W e b - B a s e d - S y s t e m s -  
+*This project represents academic research in multilingual text compression and demonstrates practical implementation of dictionary-based compression algorithms for web-based systems.*#   D i c t i o n a r y - B a s e d - C o m p r e s s i o n - f o r - M u l t i l i n g u a l - T e x t - D a t a - i n - W e b - B a s e d - S y s t e m s - 
+ 
  
