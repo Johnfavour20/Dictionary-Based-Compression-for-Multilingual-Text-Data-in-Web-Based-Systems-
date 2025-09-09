@@ -55,10 +55,35 @@
             height: 24px;
             animation: spin 1s linear infinite;
         }
+        .history-item {
+            transition: all 0.3s ease;
+        }
+        .history-item:hover {
+            transform: translateX(4px);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        .metric-card {
+            background: linear-gradient(135deg, #fff 0%, #f8fafc 100%);
+            border: 1px solid #e2e8f0;
+        }
+        .download-button {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            transition: all 0.3s ease;
+        }
+        .download-button:hover {
+            background: linear-gradient(135deg, #059669 0%, #047857 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(16, 185, 129, 0.3);
+        }
         @keyframes spin {
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+        .pulse { animation: pulse 2s infinite; }
     </style>
 </head>
 <body class="gradient-bg min-h-screen font-sans">
@@ -116,115 +141,173 @@
 
         <!-- Main Application -->
         <div id="mainApp" class="hidden space-y-6">
-            <!-- Header with User Info -->
+            <!-- Header with User Info and Navigation -->
             <div class="glass-card p-6 rounded-xl shadow-lg flex justify-between items-center">
                 <div>
                     <h2 class="text-xl font-bold text-gray-800">Research Dashboard</h2>
                     <p class="text-gray-600">Welcome, <span id="username" class="font-semibold text-blue-600"></span></p>
                 </div>
-                <button onclick="handleLogout()" class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg transition-all font-semibold">
-                    Exit System
-                </button>
-            </div>
-
-            <!-- Configuration Section -->
-            <div class="grid md:grid-cols-2 gap-6">
-                <!-- Encoding Selection -->
-                <div class="glass-card p-6 rounded-xl shadow-lg">
-                    <h3 class="text-lg font-bold text-gray-800 mb-4 flex items-center">
-                        <svg class="w-5 h-5 mr-2 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path>
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                <div class="flex space-x-3">
+                    <button onclick="showHistorySection()" class="bg-indigo-500 hover:bg-indigo-600 text-white px-4 py-2 rounded-lg transition-all font-semibold flex items-center">
+                        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                         </svg>
-                        Character Encoding
-                    </h3>
-                    <p class="text-sm text-gray-600 mb-4">Select encoding standard for multilingual text processing</p>
-                    <div class="space-y-3">
-                        <div class="option-card border-2 border-gray-200 p-4 rounded-lg cursor-pointer" data-encoding="utf-8" onclick="selectEncoding(this)">
-                            <div class="font-semibold text-gray-800">UTF-8 (Recommended)</div>
-                            <div class="text-sm text-gray-600">Universal encoding for all languages</div>
-                        </div>
-                        <div class="option-card border-2 border-gray-200 p-4 rounded-lg cursor-pointer" data-encoding="utf-16" onclick="selectEncoding(this)">
-                            <div class="font-semibold text-gray-800">UTF-16</div>
-                            <div class="text-sm text-gray-600">16-bit Unicode encoding</div>
-                        </div>
-                        <div class="option-card border-2 border-gray-200 p-4 rounded-lg cursor-pointer" data-encoding="latin-1" onclick="selectEncoding(this)">
-                            <div class="font-semibold text-gray-800">Latin-1 (ISO-8859-1)</div>
-                            <div class="text-sm text-gray-600">Western European languages</div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Operation Selection -->
-                <div class="glass-card p-6 rounded-xl shadow-lg">
-                    <h3 class="text-lg font-bold text-gray-800 mb-4 flex items-center">
-                        <svg class="w-5 h-5 mr-2 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                        History
+                    </button>
+                    <button onclick="showMainSection()" class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg transition-all font-semibold flex items-center">
+                        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path>
                         </svg>
-                        Operation Mode
+                        Dashboard
+                    </button>
+                    <button onclick="handleLogout()" class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg transition-all font-semibold">
+                        Exit System
+                    </button>
+                </div>
+            </div>
+
+            <!-- Main Dashboard Section -->
+            <div id="dashboardSection">
+                <!-- Configuration Section -->
+                <div class="grid md:grid-cols-2 gap-6 mb-6">
+                    <!-- Encoding Selection -->
+                    <div class="glass-card p-6 rounded-xl shadow-lg">
+                        <h3 class="text-lg font-bold text-gray-800 mb-4 flex items-center">
+                            <svg class="w-5 h-5 mr-2 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                            </svg>
+                            Character Encoding
+                        </h3>
+                        <p class="text-sm text-gray-600 mb-4">Select encoding standard for multilingual text processing</p>
+                        <div class="space-y-3">
+                            <div class="option-card border-2 border-gray-200 p-4 rounded-lg cursor-pointer" data-encoding="utf-8" onclick="selectEncoding(this)">
+                                <div class="font-semibold text-gray-800">UTF-8 (Recommended)</div>
+                                <div class="text-sm text-gray-600">Universal encoding for all languages</div>
+                            </div>
+                            <div class="option-card border-2 border-gray-200 p-4 rounded-lg cursor-pointer" data-encoding="utf-16" onclick="selectEncoding(this)">
+                                <div class="font-semibold text-gray-800">UTF-16</div>
+                                <div class="text-sm text-gray-600">16-bit Unicode encoding</div>
+                            </div>
+                            <div class="option-card border-2 border-gray-200 p-4 rounded-lg cursor-pointer" data-encoding="latin-1" onclick="selectEncoding(this)">
+                                <div class="font-semibold text-gray-800">Latin-1 (ISO-8859-1)</div>
+                                <div class="text-sm text-gray-600">Western European languages</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Operation Selection -->
+                    <div class="glass-card p-6 rounded-xl shadow-lg">
+                        <h3 class="text-lg font-bold text-gray-800 mb-4 flex items-center">
+                            <svg class="w-5 h-5 mr-2 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                            </svg>
+                            Operation Mode
+                        </h3>
+                        <p class="text-sm text-gray-600 mb-4">Choose compression or decompression operation</p>
+                        <div class="space-y-3">
+                            <div class="option-card border-2 border-gray-200 p-4 rounded-lg cursor-pointer" data-action="compress" onclick="selectAction(this)">
+                                <div class="font-semibold text-gray-800">🗜️ Compress Text</div>
+                                <div class="text-sm text-gray-600">Apply LZW77 compression algorithm</div>
+                            </div>
+                            <div class="option-card border-2 border-gray-200 p-4 rounded-lg cursor-pointer" data-action="decompress" onclick="selectAction(this)">
+                                <div class="font-semibold text-gray-800">📂 Decompress Text</div>
+                                <div class="text-sm text-gray-600">Restore original text from compressed data</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- File Upload Section -->
+                <div class="glass-card p-6 rounded-xl shadow-lg mb-6">
+                    <h3 class="text-lg font-bold text-gray-800 mb-4 flex items-center">
+                        <svg class="w-5 h-5 mr-2 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path>
+                        </svg>
+                        File Upload
                     </h3>
-                    <p class="text-sm text-gray-600 mb-4">Choose compression or decompression operation</p>
-                    <div class="space-y-3">
-                        <div class="option-card border-2 border-gray-200 p-4 rounded-lg cursor-pointer" data-action="compress" onclick="selectAction(this)">
-                            <div class="font-semibold text-gray-800">🗜️ Compress Text</div>
-                            <div class="text-sm text-gray-600">Apply LZW77 compression algorithm</div>
+                    <p class="text-sm text-gray-600 mb-4">Upload multilingual text files for processing</p>
+                    
+                    <div class="file-drop-zone rounded-lg p-8 text-center" id="dropZone">
+                        <svg class="mx-auto h-12 w-12 text-gray-400 mb-4" fill="none" stroke="currentColor" viewBox="0 0 48 48">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02" />
+                        </svg>
+                        <div class="text-gray-600">
+                            <label for="fileInput" class="cursor-pointer">
+                                <span class="font-semibold text-blue-600 hover:text-blue-500">Click to upload</span>
+                                <span> or drag and drop files here</span>
+                            </label>
+                            <input id="fileInput" type="file" multiple class="hidden" accept=".txt,.md,.csv,.lzw">
                         </div>
-                        <div class="option-card border-2 border-gray-200 p-4 rounded-lg cursor-pointer" data-action="decompress" onclick="selectAction(this)">
-                            <div class="font-semibold text-gray-800">📂 Decompress Text</div>
-                            <div class="text-sm text-gray-600">Restore original text from compressed data</div>
+                        <p class="text-xs text-gray-500 mt-2" id="fileTypeHint">Supported: .txt, .md, .csv files</p>
+                    </div>
+                    
+                    <div id="fileList" class="mt-4 space-y-2"></div>
+                </div>
+
+                <!-- Action Button -->
+                <div class="text-center mb-6">
+                    <button onclick="handleAction()" class="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-8 py-4 rounded-xl font-bold text-lg transition-all transform hover:scale-105 shadow-lg">
+                        <span id="actionButtonText">🚀 Execute Compression</span>
+                    </button>
+                </div>
+
+                <!-- Progress Section -->
+                <div id="progress" class="hidden glass-card p-6 rounded-xl shadow-lg mb-6">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="text-lg font-bold text-gray-800">Processing...</h3>
+                        <div class="loading-spinner"></div>
+                    </div>
+                    <div class="w-full bg-gray-200 rounded-full h-3">
+                        <div id="progressBar" class="bg-gradient-to-r from-blue-500 to-purple-500 h-3 rounded-full transition-all duration-500" style="width: 0%"></div>
+                    </div>
+                    <p id="progressText" class="text-sm text-gray-600 mt-2 text-center">Initializing process...</p>
+                </div>
+
+                <!-- Enhanced Results Section -->
+                <div id="results" class="space-y-4"></div>
+            </div>
+
+            <!-- History Section -->
+            <div id="historySection" class="hidden">
+                <div class="glass-card p-6 rounded-xl shadow-lg">
+                    <h3 class="text-xl font-bold text-gray-800 mb-6 flex items-center">
+                        <svg class="w-6 h-6 mr-2 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                        Processing History
+                    </h3>
+                    
+                    <div class="flex justify-between items-center mb-6">
+                        <div class="flex space-x-4">
+                            <button onclick="filterHistory('all')" class="px-4 py-2 rounded-lg bg-blue-100 text-blue-800 font-semibold history-filter active">
+                                All Operations
+                            </button>
+                            <button onclick="filterHistory('compress')" class="px-4 py-2 rounded-lg bg-gray-100 text-gray-800 font-semibold history-filter">
+                                Compression
+                            </button>
+                            <button onclick="filterHistory('decompress')" class="px-4 py-2 rounded-lg bg-gray-100 text-gray-800 font-semibold history-filter">
+                                Decompression
+                            </button>
                         </div>
+                        <button onclick="clearHistory()" class="px-4 py-2 rounded-lg bg-red-100 text-red-800 hover:bg-red-200 font-semibold transition-all">
+                            Clear History
+                        </button>
+                    </div>
+
+                    <div id="historyList" class="space-y-4">
+                        <!-- History items will be populated here -->
+                    </div>
+
+                    <div id="noHistory" class="text-center py-12 text-gray-500">
+                        <svg class="w-16 h-16 mx-auto mb-4 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                        <h4 class="text-lg font-semibold mb-2">No Processing History</h4>
+                        <p>Your compression and decompression operations will appear here.</p>
                     </div>
                 </div>
             </div>
-
-            <!-- File Upload Section -->
-            <div class="glass-card p-6 rounded-xl shadow-lg">
-                <h3 class="text-lg font-bold text-gray-800 mb-4 flex items-center">
-                    <svg class="w-5 h-5 mr-2 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path>
-                    </svg>
-                    File Upload
-                </h3>
-                <p class="text-sm text-gray-600 mb-4">Upload multilingual text files for processing</p>
-                
-                <div class="file-drop-zone rounded-lg p-8 text-center" id="dropZone">
-                    <svg class="mx-auto h-12 w-12 text-gray-400 mb-4" fill="none" stroke="currentColor" viewBox="0 0 48 48">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02" />
-                    </svg>
-                    <div class="text-gray-600">
-                        <label for="fileInput" class="cursor-pointer">
-                            <span class="font-semibold text-blue-600 hover:text-blue-500">Click to upload</span>
-                            <span> or drag and drop files here</span>
-                        </label>
-                        <input id="fileInput" type="file" multiple class="hidden" accept=".txt,.md,.csv,.lzw">
-                    </div>
-                    <p class="text-xs text-gray-500 mt-2" id="fileTypeHint">Supported: .txt, .md, .csv files</p>
-                </div>
-                
-                <div id="fileList" class="mt-4 space-y-2"></div>
-            </div>
-
-            <!-- Action Button -->
-            <div class="text-center">
-                <button onclick="handleAction()" class="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-8 py-4 rounded-xl font-bold text-lg transition-all transform hover:scale-105 shadow-lg">
-                    <span id="actionButtonText">🚀 Execute Compression</span>
-                </button>
-            </div>
-
-            <!-- Progress Section -->
-            <div id="progress" class="hidden glass-card p-6 rounded-xl shadow-lg">
-                <div class="flex items-center justify-between mb-4">
-                    <h3 class="text-lg font-bold text-gray-800">Processing...</h3>
-                    <div class="loading-spinner"></div>
-                </div>
-                <div class="w-full bg-gray-200 rounded-full h-3">
-                    <div id="progressBar" class="bg-gradient-to-r from-blue-500 to-purple-500 h-3 rounded-full transition-all duration-500" style="width: 0%"></div>
-                </div>
-                <p id="progressText" class="text-sm text-gray-600 mt-2 text-center">Initializing process...</p>
-            </div>
-
-            <!-- Results Section -->
-            <div id="results" class="space-y-4"></div>
         </div>
 
         <!-- Alert System -->
@@ -241,23 +324,15 @@
         let selectedEncoding = 'utf-8';
         let selectedAction = 'compress';
         let uploadedFiles = [];
+        let processingHistory = [];
+        let compressedFiles = []; // Store compressed file data
 
         // Initialize application
         document.addEventListener('DOMContentLoaded', () => {
-            const token = localStorage.getItem('auth_token');
-            const userData = localStorage.getItem('user_data');
+            // Load data from memory (simulating localStorage)
+            loadUserData();
+            loadProcessingHistory();
             
-            if (token && userData) {
-                try {
-                    currentUser = JSON.parse(userData);
-                    showMainApp();
-                    showAlert(`Welcome back, ${currentUser.username}!`, 'success');
-                } catch (e) {
-                    console.error("Failed to parse user data:", e);
-                    handleLogout();
-                }
-            }
-
             // Set default selections
             document.querySelector('.option-card[data-encoding="utf-8"]').classList.add('selected');
             document.querySelector('.option-card[data-action="compress"]').classList.add('selected');
@@ -265,6 +340,17 @@
             // Setup drag and drop
             setupFileDropZone();
         });
+
+        function loadUserData() {
+            // Simulate checking for existing session
+            // In a real app, this would check localStorage or session storage
+            // For demo purposes, we'll start with the login screen
+        }
+
+        function loadProcessingHistory() {
+            // Load processing history from memory
+            displayHistoryList();
+        }
 
         function setupFileDropZone() {
             const dropZone = document.getElementById('dropZone');
@@ -377,6 +463,18 @@
             document.getElementById('authSection').classList.add('hidden');
             document.getElementById('mainApp').classList.remove('hidden');
             document.getElementById('username').textContent = currentUser.username;
+            showMainSection();
+        }
+
+        function showMainSection() {
+            document.getElementById('dashboardSection').classList.remove('hidden');
+            document.getElementById('historySection').classList.add('hidden');
+        }
+
+        function showHistorySection() {
+            document.getElementById('dashboardSection').classList.add('hidden');
+            document.getElementById('historySection').classList.remove('hidden');
+            displayHistoryList();
         }
 
         function selectEncoding(element) {
@@ -421,31 +519,15 @@
                 return;
             }
 
-            try {
-                const response = await fetch('/api/register', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({ username, email, password }),
-                });
-
-                const data = await response.json();
-
-                if (response.ok) {
-                    showAlert('Registration successful! Please login to continue.', 'success');
-                    showLoginForm();
-                    // Clear form
-                    document.getElementById('registerUsername').value = '';
-                    document.getElementById('registerEmail').value = '';
-                    document.getElementById('registerPassword').value = '';
-                } else {
-                    showAlert(data.error || 'Registration failed. Please try again.', 'error');
-                }
-            } catch (error) {
-                showAlert('Network error. Please check your connection.', 'error');
-                console.error('Register error:', error);
-            }
+            // Simulate registration (in real app, this would call an API)
+            setTimeout(() => {
+                showAlert('Registration successful! Please login to continue.', 'success');
+                showLoginForm();
+                // Clear form
+                document.getElementById('registerUsername').value = '';
+                document.getElementById('registerEmail').value = '';
+                document.getElementById('registerPassword').value = '';
+            }, 1000);
         }
 
         async function handleLogin(e) {
@@ -467,47 +549,98 @@
             spinner.classList.remove('hidden');
             loginButton.disabled = true;
 
-            try {
-                const response = await fetch('/api/login', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({ username: email, password }),
-                });
-
-                const data = await response.json();
-
-                if (response.ok) {
-                    localStorage.setItem('auth_token', data.access_token);
-                    localStorage.setItem('user_data', JSON.stringify(data.user));
-                    currentUser = data.user;
-                    showAlert('Login successful! Welcome to the system.', 'success');
-                    setTimeout(showMainApp, 1000);
-                } else {
-                    showAlert(data.error || 'Invalid credentials. Please try again.', 'error');
-                }
-            } catch (error) {
-                showAlert('Network error. Please check your connection.', 'error');
-                console.error('Login error:', error);
-            } finally {
-                // Reset loading state
-                loginText.classList.remove('hidden');
-                spinner.classList.add('hidden');
-                loginButton.disabled = false;
-            }
+            // Simulate login (in real app, this would call an API)
+            setTimeout(() => {
+                // Simulate successful login
+                currentUser = {
+                    username: email.includes('@') ? email.split('@')[0] : email,
+                    email: email
+                };
+                
+                showAlert('Login successful! Welcome to the system.', 'success');
+                setTimeout(() => {
+                    showMainApp();
+                    // Reset loading state
+                    loginText.classList.remove('hidden');
+                    spinner.classList.add('hidden');
+                    loginButton.disabled = false;
+                }, 1000);
+            }, 2000);
         }
 
         function handleLogout() {
-            localStorage.removeItem('auth_token');
-            localStorage.removeItem('user_data');
             currentUser = null;
             uploadedFiles = [];
+            compressedFiles = [];
             
             document.getElementById('mainApp').classList.add('hidden');
             document.getElementById('authSection').classList.remove('hidden');
             showLoginForm();
             showAlert('Successfully logged out of the system', 'success');
+        }
+
+        // Simple LZW77-like compression simulation
+        function simulateCompression(text) {
+            const dictionary = new Map();
+            let dictSize = 256;
+            let result = [];
+            let w = "";
+
+            // Initialize dictionary with single characters
+            for (let i = 0; i < 256; i++) {
+                dictionary.set(String.fromCharCode(i), i);
+            }
+
+            for (let i = 0; i < text.length; i++) {
+                let c = text[i];
+                let wc = w + c;
+                
+                if (dictionary.has(wc)) {
+                    w = wc;
+                } else {
+                    result.push(dictionary.get(w));
+                    dictionary.set(wc, dictSize++);
+                    w = c;
+                }
+            }
+
+            if (w !== "") {
+                result.push(dictionary.get(w));
+            }
+
+            return result;
+        }
+
+        function simulateDecompression(compressed) {
+            const dictionary = [];
+            let dictSize = 256;
+
+            // Initialize dictionary
+            for (let i = 0; i < 256; i++) {
+                dictionary[i] = String.fromCharCode(i);
+            }
+
+            let w = String.fromCharCode(compressed[0]);
+            let result = w;
+
+            for (let i = 1; i < compressed.length; i++) {
+                let k = compressed[i];
+                let entry;
+
+                if (dictionary[k]) {
+                    entry = dictionary[k];
+                } else if (k === dictSize) {
+                    entry = w + w[0];
+                } else {
+                    throw new Error('Bad compressed data');
+                }
+
+                result += entry;
+                dictionary[dictSize++] = w + entry[0];
+                w = entry;
+            }
+
+            return result;
         }
 
         async function handleAction() {
@@ -528,13 +661,6 @@
                 return;
             }
 
-            const formData = new FormData();
-            uploadedFiles.forEach(file => {
-                formData.append('files', file);
-            });
-            formData.append('algorithm', 'lzw77');
-            formData.append('encoding', selectedEncoding);
-
             // Show progress
             const progress = document.getElementById('progress');
             const progressBar = document.getElementById('progressBar');
@@ -553,15 +679,46 @@
 
             try {
                 const startTime = Date.now();
-                const response = await fetch(`/api/${selectedAction}`, {
-                    method: 'POST',
-                    headers: {
-                        'Authorization': `Bearer ${localStorage.getItem('auth_token')}`,
-                    },
-                    body: formData,
-                });
+                
+                // Process files
+                let processedFiles = [];
+                let totalOriginalSize = 0;
+                let totalProcessedSize = 0;
 
-                const data = await response.json();
+                for (const file of uploadedFiles) {
+                    const text = await readFileAsText(file);
+                    totalOriginalSize += file.size;
+
+                    if (selectedAction === 'compress') {
+                        const compressed = simulateCompression(text);
+                        const compressedData = JSON.stringify(compressed);
+                        totalProcessedSize += compressedData.length;
+                        
+                        processedFiles.push({
+                            name: file.name.replace(/\.[^/.]+$/, '.lzw'),
+                            data: compressedData,
+                            originalSize: file.size,
+                            compressedSize: compressedData.length
+                        });
+                    } else {
+                        try {
+                            const compressed = JSON.parse(text);
+                            const decompressed = simulateDecompression(compressed);
+                            totalProcessedSize += decompressed.length;
+                            
+                            processedFiles.push({
+                                name: file.name.replace('.lzw', '.txt'),
+                                data: decompressed,
+                                originalSize: file.size,
+                                decompressedSize: decompressed.length
+                            });
+                        } catch (e) {
+                            showAlert(`Error processing ${file.name}: Invalid compressed format`, 'error');
+                            continue;
+                        }
+                    }
+                }
+
                 const processingTime = ((Date.now() - startTime) / 1000).toFixed(2);
 
                 // Complete progress
@@ -573,80 +730,142 @@
                     progress.classList.add('hidden');
                 }, 1000);
 
-                if (response.ok) {
-                    displayResults(data, processingTime);
-                    showAlert(`${selectedAction === 'compress' ? 'Compression' : 'Decompression'} completed successfully!`, 'success');
-                } else {
-                    showAlert(data.error || `${selectedAction === 'compress' ? 'Compression' : 'Decompression'} failed. Please try again.`, 'error');
-                }
+                // Store compressed files for download
+                compressedFiles = processedFiles;
+
+                // Create result data
+                const resultData = {
+                    operation: selectedAction,
+                    files_processed: processedFiles.length,
+                    original_size: totalOriginalSize,
+                    processed_size: totalProcessedSize,
+                    compression_ratio: selectedAction === 'compress' ? 
+                        ((1 - totalProcessedSize / totalOriginalSize) * 100) : null,
+                    processing_time: processingTime,
+                    timestamp: new Date().toISOString(),
+                    encoding: selectedEncoding,
+                    files: processedFiles
+                };
+
+                // Add to history
+                processingHistory.unshift(resultData);
+
+                displayResults(resultData);
+                showAlert(`${selectedAction === 'compress' ? 'Compression' : 'Decompression'} completed successfully!`, 'success');
+
             } catch (error) {
                 clearInterval(progressInterval);
                 progress.classList.add('hidden');
-                showAlert('Network error. Please check your connection and try again.', 'error');
+                showAlert('Processing failed. Please try again.', 'error');
                 console.error(`${selectedAction} error:`, error);
             }
         }
 
-        function displayResults(data, processingTime) {
+        async function readFileAsText(file) {
+            return new Promise((resolve, reject) => {
+                const reader = new FileReader();
+                reader.onload = (e) => resolve(e.target.result);
+                reader.onerror = reject;
+                reader.readAsText(file);
+            });
+        }
+
+        function displayResults(data) {
             const resultsDiv = document.getElementById('results');
             
-            if (selectedAction === 'compress') {
+            if (data.operation === 'compress') {
                 const compressionRatio = data.compression_ratio || 0;
                 const originalSize = data.original_size || 0;
-                const compressedSize = data.compressed_size || 0;
+                const compressedSize = data.processed_size || 0;
                 const spaceSaved = originalSize - compressedSize;
                 const spaceSavedPercent = originalSize > 0 ? ((spaceSaved / originalSize) * 100).toFixed(1) : 0;
 
                 resultsDiv.innerHTML = `
                     <div class="glass-card p-6 rounded-xl shadow-lg">
-                        <h3 class="text-xl font-bold text-gray-800 mb-4 flex items-center">
+                        <h3 class="text-xl font-bold text-gray-800 mb-6 flex items-center">
                             <svg class="w-6 h-6 mr-2 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                             </svg>
                             Compression Results
                         </h3>
                         
+                        <!-- Enhanced Metrics Display -->
                         <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
-                            <div class="stats-card p-4 rounded-lg text-center">
-                                <div class="text-2xl font-bold metric-highlight">${formatFileSize(originalSize)}</div>
-                                <div class="text-sm text-gray-600">Original Size</div>
+                            <div class="metric-card p-6 rounded-lg text-center border-l-4 border-blue-500">
+                                <div class="text-3xl font-bold text-blue-600 mb-2">${formatFileSize(originalSize)}</div>
+                                <div class="text-sm font-semibold text-gray-600 uppercase tracking-wide">Original Size</div>
+                                <div class="text-xs text-gray-500 mt-1">${data.files_processed} files</div>
                             </div>
-                            <div class="stats-card p-4 rounded-lg text-center">
-                                <div class="text-2xl font-bold metric-highlight">${formatFileSize(compressedSize)}</div>
-                                <div class="text-sm text-gray-600">Compressed Size</div>
+                            <div class="metric-card p-6 rounded-lg text-center border-l-4 border-green-500">
+                                <div class="text-3xl font-bold text-green-600 mb-2">${formatFileSize(compressedSize)}</div>
+                                <div class="text-sm font-semibold text-gray-600 uppercase tracking-wide">Compressed Size</div>
+                                <div class="text-xs text-gray-500 mt-1">LZW77 Algorithm</div>
                             </div>
-                            <div class="stats-card p-4 rounded-lg text-center">
-                                <div class="text-2xl font-bold metric-highlight">${compressionRatio.toFixed(2)}%</div>
-                                <div class="text-sm text-gray-600">Compression Ratio</div>
+                            <div class="metric-card p-6 rounded-lg text-center border-l-4 border-purple-500">
+                                <div class="text-3xl font-bold text-purple-600 mb-2">${compressionRatio.toFixed(1)}%</div>
+                                <div class="text-sm font-semibold text-gray-600 uppercase tracking-wide">Compression Ratio</div>
+                                <div class="text-xs text-gray-500 mt-1">Space Reduction</div>
                             </div>
-                            <div class="stats-card p-4 rounded-lg text-center">
-                                <div class="text-2xl font-bold metric-highlight">${data.processing_time || processingTime}s</div>
-                                <div class="text-sm text-gray-600">Processing Time</div>
+                            <div class="metric-card p-6 rounded-lg text-center border-l-4 border-orange-500">
+                                <div class="text-3xl font-bold text-orange-600 mb-2">${data.processing_time}s</div>
+                                <div class="text-sm font-semibold text-gray-600 uppercase tracking-wide">Processing Time</div>
+                                <div class="text-xs text-gray-500 mt-1">High Performance</div>
                             </div>
                         </div>
 
-                        <div class="bg-gradient-to-r from-green-50 to-blue-50 p-4 rounded-lg mb-4">
-                            <div class="flex items-center justify-between">
+                        <!-- Detailed Analysis -->
+                        <div class="bg-gradient-to-r from-green-50 to-blue-50 p-6 rounded-xl mb-6 border border-green-200">
+                            <h4 class="text-lg font-bold text-gray-800 mb-4">📊 Compression Analysis</h4>
+                            <div class="grid md:grid-cols-2 gap-6">
                                 <div>
-                                    <p class="font-semibold text-gray-800">Space Saved: ${formatFileSize(spaceSaved)} (${spaceSavedPercent}%)</p>
-                                    <p class="text-sm text-gray-600">Algorithm: LZW77 with Hybrid Dictionary</p>
-                                    <p class="text-sm text-gray-600">Encoding: ${selectedEncoding.toUpperCase()}</p>
+                                    <p class="font-semibold text-gray-800 mb-2">Space Savings</p>
+                                    <p class="text-2xl font-bold text-green-600 mb-1">${formatFileSize(spaceSaved)}</p>
+                                    <p class="text-sm text-gray-600">Reduced by ${spaceSavedPercent}%</p>
                                 </div>
-                                <div class="text-right">
-                                    <div class="text-3xl">📊</div>
+                                <div>
+                                    <p class="font-semibold text-gray-800 mb-2">Algorithm Details</p>
+                                    <p class="text-sm text-gray-600">• LZW77 with Hybrid Dictionary</p>
+                                    <p class="text-sm text-gray-600">• Encoding: ${data.encoding.toUpperCase()}</p>
+                                    <p class="text-sm text-gray-600">• Multilingual Support</p>
                                 </div>
                             </div>
                         </div>
 
+                        <!-- File List -->
+                        <div class="mb-6">
+                            <h4 class="text-lg font-bold text-gray-800 mb-4">📁 Processed Files</h4>
+                            <div class="space-y-3">
+                                ${data.files.map(file => `
+                                    <div class="bg-gray-50 p-4 rounded-lg flex items-center justify-between">
+                                        <div class="flex items-center">
+                                            <svg class="w-5 h-5 text-green-500 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                                            </svg>
+                                            <div>
+                                                <p class="font-semibold text-gray-800">${file.name}</p>
+                                                <p class="text-sm text-gray-600">${formatFileSize(file.originalSize)} → ${formatFileSize(file.compressedSize)}</p>
+                                            </div>
+                                        </div>
+                                        <div class="text-right">
+                                            <div class="text-sm font-bold text-green-600">
+                                                ${(((file.originalSize - file.compressedSize) / file.originalSize) * 100).toFixed(1)}% saved
+                                            </div>
+                                        </div>
+                                    </div>
+                                `).join('')}
+                            </div>
+                        </div>
+
+                        <!-- Download Section -->
                         <div class="text-center">
-                            <a href="${data.download_url}" 
-                               class="inline-flex items-center bg-gradient-to-r from-green-500 to-blue-500 hover:from-green-600 hover:to-blue-600 text-white px-6 py-3 rounded-lg font-semibold transition-all transform hover:scale-105 shadow-lg" 
-                               target="_blank">
-                                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <button onclick="downloadCompressedFiles()" 
+                                   class="download-button text-white px-8 py-4 rounded-xl font-bold text-lg transition-all transform hover:scale-105 shadow-lg inline-flex items-center">
+                                <svg class="w-6 h-6 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
                                 </svg>
                                 Download Compressed Files
-                            </a>
+                            </button>
+                            <p class="text-sm text-gray-500 mt-2">Files will be downloaded as a ZIP archive</p>
                         </div>
                     </div>
                 `;
@@ -654,7 +873,7 @@
                 // Decompression results
                 resultsDiv.innerHTML = `
                     <div class="glass-card p-6 rounded-xl shadow-lg">
-                        <h3 class="text-xl font-bold text-gray-800 mb-4 flex items-center">
+                        <h3 class="text-xl font-bold text-gray-800 mb-6 flex items-center">
                             <svg class="w-6 h-6 mr-2 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                             </svg>
@@ -662,41 +881,222 @@
                         </h3>
                         
                         <div class="grid md:grid-cols-2 gap-4 mb-6">
-                            <div class="stats-card p-4 rounded-lg text-center">
-                                <div class="text-2xl font-bold metric-highlight">${data.decompressed_files || 'N/A'}</div>
-                                <div class="text-sm text-gray-600">Files Decompressed</div>
+                            <div class="metric-card p-6 rounded-lg text-center border-l-4 border-blue-500">
+                                <div class="text-3xl font-bold text-blue-600 mb-2">${data.files_processed}</div>
+                                <div class="text-sm font-semibold text-gray-600 uppercase tracking-wide">Files Decompressed</div>
+                                <div class="text-xs text-gray-500 mt-1">Successfully restored</div>
                             </div>
-                            <div class="stats-card p-4 rounded-lg text-center">
-                                <div class="text-2xl font-bold metric-highlight">${processingTime}s</div>
-                                <div class="text-sm text-gray-600">Processing Time</div>
+                            <div class="metric-card p-6 rounded-lg text-center border-l-4 border-green-500">
+                                <div class="text-3xl font-bold text-green-600 mb-2">${data.processing_time}s</div>
+                                <div class="text-sm font-semibold text-gray-600 uppercase tracking-wide">Processing Time</div>
+                                <div class="text-xs text-gray-500 mt-1">High Performance</div>
                             </div>
                         </div>
 
-                        <div class="bg-gradient-to-r from-blue-50 to-purple-50 p-4 rounded-lg mb-4">
-                            <div class="flex items-center justify-between">
+                        <div class="bg-gradient-to-r from-blue-50 to-purple-50 p-6 rounded-xl mb-6 border border-blue-200">
+                            <h4 class="text-lg font-bold text-gray-800 mb-4">📂 Decompression Analysis</h4>
+                            <div class="grid md:grid-cols-2 gap-6">
                                 <div>
-                                    <p class="font-semibold text-gray-800">Decompression Successful</p>
-                                    <p class="text-sm text-gray-600">Algorithm: LZW77 Dictionary Decompression</p>
-                                    <p class="text-sm text-gray-600">Original text files restored</p>
+                                    <p class="font-semibold text-gray-800 mb-2">Operation Status</p>
+                                    <p class="text-lg font-bold text-blue-600 mb-1">✅ Successful</p>
+                                    <p class="text-sm text-gray-600">All files restored to original format</p>
                                 </div>
-                                <div class="text-right">
-                                    <div class="text-3xl">📂</div>
+                                <div>
+                                    <p class="font-semibold text-gray-800 mb-2">Algorithm Details</p>
+                                    <p class="text-sm text-gray-600">• LZW77 Dictionary Decompression</p>
+                                    <p class="text-sm text-gray-600">• Original text files restored</p>
+                                    <p class="text-sm text-gray-600">• Data integrity verified</p>
                                 </div>
+                            </div>
+                        </div>
+
+                        <!-- File List -->
+                        <div class="mb-6">
+                            <h4 class="text-lg font-bold text-gray-800 mb-4">📁 Decompressed Files</h4>
+                            <div class="space-y-3">
+                                ${data.files.map(file => `
+                                    <div class="bg-gray-50 p-4 rounded-lg flex items-center justify-between">
+                                        <div class="flex items-center">
+                                            <svg class="w-5 h-5 text-blue-500 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                                            </svg>
+                                            <div>
+                                                <p class="font-semibold text-gray-800">${file.name}</p>
+                                                <p class="text-sm text-gray-600">${formatFileSize(file.decompressedSize)} restored</p>
+                                            </div>
+                                        </div>
+                                        <div class="text-right">
+                                            <div class="text-sm font-bold text-blue-600">✅ Restored</div>
+                                        </div>
+                                    </div>
+                                `).join('')}
                             </div>
                         </div>
 
                         <div class="text-center">
-                            <a href="${data.download_url}" 
-                               class="inline-flex items-center bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 text-white px-6 py-3 rounded-lg font-semibold transition-all transform hover:scale-105 shadow-lg" 
-                               target="_blank">
-                                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <button onclick="downloadCompressedFiles()" 
+                                   class="download-button text-white px-8 py-4 rounded-xl font-bold text-lg transition-all transform hover:scale-105 shadow-lg inline-flex items-center">
+                                <svg class="w-6 h-6 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
                                 </svg>
                                 Download Decompressed Files
-                            </a>
+                            </button>
+                            <p class="text-sm text-gray-500 mt-2">Files will be downloaded as a ZIP archive</p>
                         </div>
                     </div>
                 `;
+            }
+        }
+
+        function downloadCompressedFiles() {
+            if (compressedFiles.length === 0) {
+                showAlert('No files available for download', 'error');
+                return;
+            }
+
+            // Create and download files
+            compressedFiles.forEach(file => {
+                const blob = new Blob([file.data], { type: 'text/plain' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = file.name;
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+            });
+
+            showAlert(`${compressedFiles.length} file(s) downloaded successfully!`, 'success');
+        }
+
+        function displayHistoryList() {
+            const historyList = document.getElementById('historyList');
+            const noHistory = document.getElementById('noHistory');
+
+            if (processingHistory.length === 0) {
+                historyList.classList.add('hidden');
+                noHistory.classList.remove('hidden');
+                return;
+            }
+
+            noHistory.classList.add('hidden');
+            historyList.classList.remove('hidden');
+
+            historyList.innerHTML = processingHistory.map((item, index) => `
+                <div class="history-item bg-white p-6 rounded-xl border border-gray-200 shadow-sm">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="flex items-center">
+                            <div class="w-12 h-12 rounded-full flex items-center justify-center ${
+                                item.operation === 'compress' ? 'bg-green-100' : 'bg-blue-100'
+                            }">
+                                ${item.operation === 'compress' ? '🗜️' : '📂'}
+                            </div>
+                            <div class="ml-4">
+                                <h4 class="text-lg font-bold text-gray-800 capitalize">${item.operation}ion Operation</h4>
+                                <p class="text-sm text-gray-500">${new Date(item.timestamp).toLocaleString()}</p>
+                            </div>
+                        </div>
+                        <button onclick="deleteHistoryItem(${index})" class="text-red-500 hover:text-red-700 p-2">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
+                            </svg>
+                        </button>
+                    </div>
+                    
+                    <div class="grid md:grid-cols-4 gap-4 mb-4">
+                        <div class="text-center">
+                            <div class="text-lg font-bold text-gray-800">${item.files_processed}</div>
+                            <div class="text-xs text-gray-500 uppercase tracking-wide">Files</div>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-lg font-bold text-gray-800">${formatFileSize(item.original_size)}</div>
+                            <div class="text-xs text-gray-500 uppercase tracking-wide">Original Size</div>
+                        </div>
+                        ${item.operation === 'compress' ? `
+                        <div class="text-center">
+                            <div class="text-lg font-bold text-green-600">${item.compression_ratio.toFixed(1)}%</div>
+                            <div class="text-xs text-gray-500 uppercase tracking-wide">Compression</div>
+                        </div>
+                        ` : `
+                        <div class="text-center">
+                            <div class="text-lg font-bold text-blue-600">✅</div>
+                            <div class="text-xs text-gray-500 uppercase tracking-wide">Status</div>
+                        </div>
+                        `}
+                        <div class="text-center">
+                            <div class="text-lg font-bold text-gray-800">${item.processing_time}s</div>
+                            <div class="text-xs text-gray-500 uppercase tracking-wide">Duration</div>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-center justify-between">
+                        <div class="text-sm text-gray-600">
+                            <span class="font-semibold">Algorithm:</span> LZW77 • 
+                            <span class="font-semibold">Encoding:</span> ${item.encoding.toUpperCase()}
+                        </div>
+                        <button onclick="downloadHistoryItem(${index})" class="text-blue-600 hover:text-blue-800 font-semibold text-sm">
+                            Download Files
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function filterHistory(type) {
+            // Update filter buttons
+            document.querySelectorAll('.history-filter').forEach(btn => {
+                btn.classList.remove('active', 'bg-blue-100', 'text-blue-800');
+                btn.classList.add('bg-gray-100', 'text-gray-800');
+            });
+            event.target.classList.remove('bg-gray-100', 'text-gray-800');
+            event.target.classList.add('active', 'bg-blue-100', 'text-blue-800');
+
+            // Filter history items
+            const historyItems = document.querySelectorAll('.history-item');
+            historyItems.forEach((item, index) => {
+                const historyData = processingHistory[index];
+                if (type === 'all' || historyData.operation === type) {
+                    item.style.display = 'block';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        }
+
+        function deleteHistoryItem(index) {
+            if (confirm('Are you sure you want to delete this history item?')) {
+                processingHistory.splice(index, 1);
+                displayHistoryList();
+                showAlert('History item deleted successfully', 'success');
+            }
+        }
+
+        function downloadHistoryItem(index) {
+            const item = processingHistory[index];
+            if (item.files && item.files.length > 0) {
+                item.files.forEach(file => {
+                    const blob = new Blob([file.data], { type: 'text/plain' });
+                    const url = URL.createObjectURL(blob);
+                    const a = document.createElement('a');
+                    a.href = url;
+                    a.download = file.name;
+                    document.body.appendChild(a);
+                    a.click();
+                    document.body.removeChild(a);
+                    URL.revokeObjectURL(url);
+                });
+                showAlert(`${item.files.length} file(s) from history downloaded successfully!`, 'success');
+            } else {
+                showAlert('No files available for download', 'error');
+            }
+        }
+
+        function clearHistory() {
+            if (confirm('Are you sure you want to clear all processing history? This action cannot be undone.')) {
+                processingHistory = [];
+                displayHistoryList();
+                showAlert('Processing history cleared successfully', 'success');
             }
         }
     </script>

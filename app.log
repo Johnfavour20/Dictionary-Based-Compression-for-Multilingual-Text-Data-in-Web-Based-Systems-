@@ -192,3 +192,16 @@
 2025-08-12 11:43:09,599 - werkzeug - INFO - 127.0.0.1 - - [12/Aug/2025 11:43:09] "GET / HTTP/1.1" 200 -
 2025-08-12 11:49:21,865 - werkzeug - INFO - 127.0.0.1 - - [12/Aug/2025 11:49:21] "POST /api/login HTTP/1.1" 200 -
 2025-08-12 11:55:41,179 - werkzeug - INFO - 127.0.0.1 - - [12/Aug/2025 11:55:41] "[36mGET / HTTP/1.1[0m" 304 -
+2025-08-12 13:53:51,291 - werkzeug - INFO - 127.0.0.1 - - [12/Aug/2025 13:53:51] "POST /api/login HTTP/1.1" 200 -
+2025-08-12 18:00:59,185 - __main__ - INFO - Database schema initialized successfully
+2025-08-12 18:01:02,650 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5001
+ * Running on http://192.168.12.183:5001
+2025-08-12 18:01:02,652 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-08-12 18:01:02,800 - werkzeug - INFO -  * Restarting with stat
+2025-08-12 18:01:03,526 - __main__ - INFO - Database schema initialized successfully
+2025-08-12 18:01:03,594 - werkzeug - WARNING -  * Debugger is active!
+2025-08-12 18:01:03,606 - werkzeug - INFO -  * Debugger PIN: 985-703-958
+2025-08-12 18:01:20,301 - werkzeug - INFO - 127.0.0.1 - - [12/Aug/2025 18:01:20] "GET / HTTP/1.1" 200 -
+2025-08-12 18:01:22,481 - werkzeug - INFO - 127.0.0.1 - - [12/Aug/2025 18:01:22] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
